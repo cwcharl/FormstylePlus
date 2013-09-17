@@ -1,7 +1,11 @@
 (function ($) {
+
+	"use strict";
+
 	var wrapper_class_suffix = "_wrapper",	
 		select_button_class = "drop_btn",
-		options = {
+		options = {},
+		default_options = {
 			throw_error_if_no_matching_label:false,
 			drop_btn: false, // if you set this to true, you'll get a nice div. 
 			drop_btn_char: '' // if you specify a char here, the div mentioned above willget a span with the supplied char inside. the only reason this gets specified here and not in the css is because it's not using the pseudo-element/content:''; combo
@@ -14,10 +18,11 @@
 				return this; //if the current tag is an input of type != check||radio, just fail here silently and pass the element along for further jquery function chaining
 			}
 
-			if(!!settings){
-				for (var prop in settings){
-					if(options.hasOwnProperty(prop)){options[prop] = settings[prop]} //if the user has specified settings, override the private options object
-				}
+			options = {}; //reset options
+			if(settings === {}){ //if there are no custom settings, use the default
+				options = $.extend(options, default_options);
+			}else{ // otherwise use the custom ones supplied
+				options = $.extend(options, settings);
 			}
 
 			var tagname = this.tagName.toLowerCase(), //current tag type name
@@ -40,18 +45,17 @@
 		_handle_selects: function($el, $wrapper){
 			var visible_markup = '<span>' + $('option:selected', $el).text() + '</span>',
 				drop_btn = (function(){ // build the dropdown button markup string with this anonymous, immediate function 
-					var d;
-					if(!!options.drop_btn){					
-						d =  '<div class="' + select_button_class + '">';//if a drop button is desired, use a jQuery selector relative to the element in question to find the selected option
-						if(!!options.drop_btn_char ){
-							d += ('<span>' + options.drop_btn_char + '</span>'); //build markup for drop down button
-						}
-						d += '</div>';
-					}
-					return d;
-				}());
+								var d;
+								if(!!options.drop_btn){					
+									d =  '<div class="' + select_button_class + '">';//if a drop button is desired, use a jQuery selector relative to the element in question to find the selected option
+									if(!!options.drop_btn_char ){
+										d += ('<span>' + options.drop_btn_char + '</span>'); //build markup for drop down button
+									}
+									d += '</div>';
+								}
+								return d;
+							}());
 				
-
 			$wrapper
 				.prepend(visible_markup) //prepend visible, stylable div tag to beginning of wrapper's insides
 				.append(drop_btn) //append the dropbutton to the end of wrapper's insides (if it doesn't exist after computations above, this will fail silently)
