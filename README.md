@@ -1,4 +1,4 @@
-FormstylePlus, named partly after its porpuse and partly for its reliance on the CSS adjacent sibling selector(+), is a jQuery plugin for converting inputs (checkboxes and radios) and select menus into an easily stylable format.
+FormstylePlus, named partly after its purpose and partly for its reliance on the CSS adjacent sibling selector(+), is a jQuery plugin for converting inputs (checkboxes and radios) and select menus into an easily stylable format.
 
 FormstylePlus comes with a preformatted stylesheet (split into biolerplate and user-defined styles) but its goal is to enable users to have maximum control over a form's style.
 
@@ -16,6 +16,4 @@ instructions, etc. to come...
 
 + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 
-please download the 'example' folder for a demo of FormstylePlus.
-
-the 'blank' folder contains stripped down files, ready to be customized.
+please download the example folder for a demo of FormstylePlus.
